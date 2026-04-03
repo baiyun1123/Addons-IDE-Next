@@ -545,7 +545,6 @@
         android:paddingTop="@dimen/space_8"
         android:paddingEnd="@dimen/screen_padding"
         android:paddingBottom="@dimen/space_8"
-        app:itemActiveIndicatorStyle="@style/Widget.Material3.NavigationBar.ActiveIndicator"
         app:itemIconTint="@color/navigation_item_color"
         app:itemTextColor="@color/navigation_item_color"
         app:labelVisibilityMode="labeled"

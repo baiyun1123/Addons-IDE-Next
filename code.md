@@ -81,3 +81,19 @@
   - 若 GitHub runner 上 `build-tools;36.0.0` 包名发生变化，需要根据 Actions 日志调整为对应可用版本。
 - 关联文件：
   - `.github/workflows/android-ci.yml`
+
+# 任务标题：补充失败日志保留，并移除可疑的底部导航样式引用
+
+- 完成时间：2026-04-04 01:33
+- 变更内容：
+  - 移除首页底部导航上自定义的 `itemActiveIndicatorStyle` 引用，避免 Material 组件样式名不匹配导致资源编译失败。
+  - 为 CI 构建命令补充 `--console=plain`，减少 Actions 日志折叠。
+  - 新增始终上传构建报告产物的步骤，失败时也会保留 `build/reports` 与 `app/build/reports`。
+- 关键决策：
+  - 先移除最可疑、最不影响界面功能的样式引用，优先缩小资源编译失败面。
+  - 不继续盲改业务代码，先确保下一轮 CI 至少能留下可直接定位的问题报告。
+- 风险与待办：
+  - 如果下一轮仍失败，需要直接查看 Actions 中上传的 `addons-ide-next-build-reports` 或日志里的首个错误块再继续修。
+- 关联文件：
+  - `app/src/main/res/layout/activity_main.xml`
+  - `.github/workflows/android-ci.yml`

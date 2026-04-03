@@ -32,19 +32,30 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build debug APK
-        run: ./gradlew --no-daemon --stacktrace --warning-mode all assembleDebug
+        run: ./gradlew --no-daemon --stacktrace --warning-mode all --console=plain assembleDebug
 
       - name: Build release APK
-        run: ./gradlew --no-daemon --stacktrace --warning-mode all assembleRelease
+        run: ./gradlew --no-daemon --stacktrace --warning-mode all --console=plain assembleRelease
 
       - name: Upload debug APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: addons-ide-next-debug-apk
           path: app/build/outputs/apk/debug/*.apk
 
       - name: Upload release APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: addons-ide-next-release-apk
           path: app/build/outputs/apk/release/*.apk
+
+      - name: Upload build reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: addons-ide-next-build-reports
+          path: |
+            build/reports/**
+            app/build/reports/**
