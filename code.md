@@ -65,3 +65,19 @@
   - `app/src/main/res/values/dimens.xml`
   - `app/build.gradle`
   - `gradle/libs.versions.toml`
+
+# 任务标题：补强 GitHub Actions 的 Android SDK 安装与构建日志输出
+
+- 完成时间：2026-04-04 01:25
+- 变更内容：
+  - 为 Android CI 工作流新增 Android SDK 环境初始化步骤。
+  - 在工作流里显式安装 `platform-tools`、`platforms;android-36`、`build-tools;36.0.0`，避免 runner 默认环境缺少编译平台导致失败。
+  - 将 Gradle 构建命令改为输出 `--stacktrace` 与 `--warning-mode all`，便于后续直接定位真实报错。
+- 关键决策：
+  - 不先下调 `compileSdk 36`，优先让 CI 安装与项目声明一致的 SDK 组件，减少对现有工程配置的二次扰动。
+  - 保留 `assembleDebug` 与 `assembleRelease` 双产物流程，只增强构建可观测性，不改发布产物结构。
+- 风险与待办：
+  - 如果 Actions 下一轮仍然失败，则基本可以排除“缺 SDK”这一层，后续直接按新的完整堆栈修代码即可。
+  - 若 GitHub runner 上 `build-tools;36.0.0` 包名发生变化，需要根据 Actions 日志调整为对应可用版本。
+- 关联文件：
+  - `.github/workflows/android-ci.yml`
