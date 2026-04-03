@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="screen_padding">20dp</dimen>
+    <dimen name="space_8">8dp</dimen>
+    <dimen name="space_12">12dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_18">18dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_24">24dp</dimen>
+    <dimen name="space_32">32dp</dimen>
+    <dimen name="radius_large">24dp</dimen>
+    <dimen name="radius_xlarge">32dp</dimen>
+    <dimen name="enter_offset">28dp</dimen>
+    <dimen name="bottom_bar_space">104dp</dimen>
+</resources>
+

@@ -1,0 +1,31 @@
+# 任务标题：完成 Addons 模组生成器首页 UI 与 GitHub Actions 构建流程
+
+- 完成时间：2026-04-04 00:25
+- 变更内容：
+  - 新增 Android 首页入口 `MainActivity` 与 `activity_main.xml`。
+  - 补充 Material 3 风格色板、主题、动画资源与装饰背景。
+  - 新增 GitHub Actions 工作流，支持 push、pull_request、手动触发自动构建 APK。
+  - 补充 `.gitignore`，避免把构建缓存提交到仓库。
+- 关键决策：
+  - 继续使用当前项目的 ViewBinding + XML 体系，不切到 Compose，降低改造成本并保持与现有 Gradle 配置一致。
+  - UI 先做成“生成器首页”而不是空白壳页，直接体现 MC Addons 生成、模板、参数、导出这几个核心场景。
+  - CI 采用 GitHub 官方 Android 构建常规链路，使用 Java 17 与 Gradle wrapper，保证本地和 GitHub 行为一致。
+- 风险与待办：
+  - 当前阶段只完成 UI 与构建流程，尚未接入真实模组生成逻辑、模板存储和导出能力。
+  - 如果后续要发布正式 Release，需要补签名配置与密钥管理。
+  - 自动上传到 GitHub 仍需当前终端具备网络与推送权限。
+- 关联文件：
+  - `app/src/main/AndroidManifest.xml`
+  - `app/src/main/java/com/addons/addons_next/MainActivity.kt`
+  - `app/src/main/res/layout/activity_main.xml`
+  - `app/src/main/res/anim/fade_slide_up.xml`
+  - `app/src/main/res/drawable/bg_root_gradient.xml`
+  - `app/src/main/res/drawable/bg_hero_orb.xml`
+  - `app/src/main/res/values/colors.xml`
+  - `app/src/main/res/values-night/colors.xml`
+  - `app/src/main/res/values/strings.xml`
+  - `app/src/main/res/values/themes.xml`
+  - `app/src/main/res/values-night/themes.xml`
+  - `.github/workflows/android-ci.yml`
+  - `.gitignore`
+

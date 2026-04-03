@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="md_theme_primary">#305A4B</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#D5F1DD</color>
+    <color name="md_theme_onPrimaryContainer">#0D1F18</color>
+    <color name="md_theme_secondary">#4E6358</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#D1E8D8</color>
+    <color name="md_theme_onSecondaryContainer">#0C1F17</color>
+    <color name="md_theme_tertiary">#2E6670</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#CCEAF0</color>
+    <color name="md_theme_onTertiaryContainer">#051F24</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_background">#F4FBF5</color>
+    <color name="md_theme_onBackground">#161D19</color>
+    <color name="md_theme_surface">#F7FAF6</color>
+    <color name="md_theme_onSurface">#161D19</color>
+    <color name="md_theme_surfaceVariant">#DDE5DC</color>
+    <color name="md_theme_onSurfaceVariant">#404942</color>
+    <color name="md_theme_outline">#707972</color>
+    <color name="md_theme_outlineVariant">#C0C9C0</color>
+    <color name="md_theme_surfaceContainer">#E9F0E8</color>
+    <color name="root_gradient_start">#F4FBF5</color>
+    <color name="root_gradient_end">#E6F1FB</color>
+    <color name="orb_start">#55B2D9C7</color>
+    <color name="orb_center">#33FFFFFF</color>
+    <color name="hero_chip_background">#FFF6FBE6</color>
+    <color name="hero_support_text">#A11D332B</color>
+    <color name="bottom_bar_background">#F4F8F3</color>
+</resources>
