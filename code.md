@@ -29,3 +29,39 @@
   - `.github/workflows/android-ci.yml`
   - `.gitignore`
 
+# 任务标题：重构 Addons 首页为项目列表，并新增个人配置页与标准草稿生成
+
+- 完成时间：2026-04-04 01:08
+- 变更内容：
+  - 将原来的长表单首页重构为“首页 / 个人”双页面底部导航，并新增右下角悬浮加号入口。
+  - 首页改为 `RecyclerView` 项目列表，补空状态、最近项目统计和更轻量的 MD3 卡片布局。
+  - 新增个人配置页，可保存默认作者标识、默认 `min_engine_version`、默认描述和资源包生成偏好。
+  - 新增底部弹窗创建流程，集中处理“新建附属包 / 复制最近配置”，不再把生成表单铺满首页。
+  - 新增项目存储与草稿生成逻辑，点击创建后会在应用工作目录生成 `behavior_pack` / `resource_pack` 与 `manifest.json`。
+  - 生成的 manifest 按 Minecraft Bedrock 官方文档的稳定版结构落地：`format_version`、`header`、`modules`、`dependencies`、`metadata`。
+- 关键决策：
+  - 保持单 Activity + XML + ViewBinding 架构，不切换 Compose，确保在现有工程上直接增量演进。
+  - 列表层改用 `RecyclerView`，避免项目数量增多后继续使用整页堆叠卡片导致滑动和首屏负担变重。
+  - 新建草稿默认使用稳定版 manifest `format_version: 2`，避免直接使用仍在预览中的 v3 造成兼容风险。
+  - 默认 `min_engine_version` 采用 `1.21.132`，同时开放到个人页配置，便于后续按官方版本节奏调整。
+- 风险与待办：
+  - 当前已完成 UI、项目本地持久化和 manifest 草稿生成，但还没有真正接入文件树浏览、Sora 编辑器和导出 `.mcaddon`。
+  - 本次未在本地执行 Gradle 编译，后续由 GitHub Actions 承担首次完整构建验证。
+  - 如果 GitHub 远程凭证失效，推送与 Actions 触发会中断，需要重新授权。
+- 关联文件：
+  - `app/src/main/java/com/addons/addons_next/MainActivity.kt`
+  - `app/src/main/java/com/addons/addons_next/AddonProject.kt`
+  - `app/src/main/java/com/addons/addons_next/AddonProjectStorage.kt`
+  - `app/src/main/java/com/addons/addons_next/ProjectListAdapter.kt`
+  - `app/src/main/res/layout/activity_main.xml`
+  - `app/src/main/res/layout/item_project.xml`
+  - `app/src/main/res/layout/dialog_create_project.xml`
+  - `app/src/main/res/menu/bottom_nav_menu.xml`
+  - `app/src/main/res/drawable/ic_add_24.xml`
+  - `app/src/main/res/drawable/ic_nav_home_24.xml`
+  - `app/src/main/res/drawable/ic_nav_account_24.xml`
+  - `app/src/main/res/color/navigation_item_color.xml`
+  - `app/src/main/res/values/strings.xml`
+  - `app/src/main/res/values/dimens.xml`
+  - `app/build.gradle`
+  - `gradle/libs.versions.toml`

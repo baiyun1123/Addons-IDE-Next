@@ -10,6 +10,6 @@
     <dimen name="radius_large">24dp</dimen>
     <dimen name="radius_xlarge">32dp</dimen>
     <dimen name="enter_offset">28dp</dimen>
-    <dimen name="bottom_bar_space">104dp</dimen>
+    <dimen name="bottom_navigation_space">104dp</dimen>
+    <dimen name="fab_bottom_margin">88dp</dimen>
 </resources>
-

@@ -1,45 +1,75 @@
 <resources>
     <string name="app_name">Addons IDE Next</string>
     <string name="topbar_overline">Minecraft Addons Studio</string>
-    <string name="topbar_title">模组生成器</string>
-    <string name="topbar_badge">MD3 Preview</string>
-    <string name="hero_chip">Bedrock Addons</string>
-    <string name="hero_title">把实体、方块和行为包，整理成一个真正可生成的工作台。</string>
-    <string name="hero_description">这一版首页先把 MC Addons 生成流程做成 Material 3 控制台风格，后续可以直接接入模板引擎、行为包输出和脚本 API 配置。</string>
-    <string name="hero_button">查看模板方案</string>
-    <string name="hero_hint">支持手机端与平板纵向布局</string>
-    <string name="status_title">当前工作状态</string>
-    <string name="status_description">首页已经按“创建配置 - 选择版本 - 预览输出 - 导出包体”的节奏排布，方便后续接逻辑。</string>
-    <string name="status_ready_label">首屏状态</string>
-    <string name="status_ready_value">可开始接逻辑</string>
-    <string name="status_target_label">目标引擎</string>
-    <string name="status_target_value">Bedrock 1.21+</string>
-    <string name="generator_title">生成参数</string>
-    <string name="generator_description">先把模组名、包名、命名空间和能力开关定下来，后续生成器逻辑可以直接读取这些控件值。</string>
-    <string name="field_module_name">模组名称</string>
-    <string name="field_package_name">包名 / 作者标识</string>
-    <string name="field_namespace">命名空间</string>
-    <string name="default_module_name">Sky Forge Arsenal</string>
-    <string name="default_package_name">com.baiyun.addons.skyforge</string>
-    <string name="default_namespace">skyforge</string>
-    <string name="version_title">目标版本</string>
-    <string name="version_stable">稳定版</string>
-    <string name="version_preview">预览版</string>
-    <string name="version_custom">自定义</string>
-    <string name="switch_animations">生成动画控制器骨架</string>
-    <string name="switch_manifest">附带 manifest 与 pack icon</string>
-    <string name="switch_script_api">启用 Script API 预设</string>
-    <string name="preview_title">输出预览</string>
-    <string name="preview_description">模板、资源与导出按钮先就位。后续只要接入 zip 打包和工程模板，即可变成真正可用的生成器。</string>
-    <string name="template_button">切换模板</string>
-    <string name="export_button">导出草稿</string>
-    <string name="pipeline_title">自动构建已经预留</string>
-    <string name="pipeline_description">仓库新增 GitHub Actions 后，推送代码即可自动编译 APK 并上传产物，方便你直接在 GitHub 上拿包测试。</string>
-    <string name="reset_button">恢复默认参数</string>
-    <string name="primary_action">开始生成 Addon</string>
-    <string name="action_placeholder">这里先占位，后续接模板页或生成逻辑。</string>
-    <string name="primary_action_feedback">首页 UI 已就绪，下一步可接入生成流程。</string>
-    <string name="template_action_feedback">模板入口已预留，适合继续做分类页或模板库。</string>
-    <string name="export_action_feedback">导出入口已预留，后续可接 zip 打包与分享。</string>
-    <string name="reset_feedback">已恢复默认演示参数。</string>
+    <string name="topbar_badge">MD3 Console</string>
+
+    <string name="nav_home">首页</string>
+    <string name="nav_profile">个人</string>
+
+    <string name="home_page_title">附属包首页</string>
+    <string name="home_page_subtitle">首页只保留项目概览和列表，创建、复制、生成都收进右下角弹窗里。</string>
+    <string name="profile_page_title">个人配置</string>
+    <string name="profile_page_subtitle">这里保存默认作者、目标版本和生成偏好，后面做编辑器时可以直接复用。</string>
+
+    <string name="home_summary_chip">Bedrock Add-ons</string>
+    <string name="home_summary_title">项目中心先轻下来，生成入口再集中起来。</string>
+    <string name="home_summary_description">新建附属包会直接落成标准草稿目录，列表只负责展示最近项目和进入后续编辑流程，避免首页继续变成长表单。</string>
+    <string name="home_stat_projects">项目数量</string>
+    <string name="home_stat_latest">最近创建</string>
+    <string name="home_stat_latest_empty">还没有项目</string>
+
+    <string name="project_list_title">项目列表</string>
+    <string name="project_list_description">使用 RecyclerView 承载项目列表，后续项目增多也不会像整页卡片那样卡顿。</string>
+    <string name="empty_title">还没有任何附属包</string>
+    <string name="empty_description">点右下角加号，或者直接从这里开始创建第一个标准化草稿工程。</string>
+    <string name="empty_action">创建附属包</string>
+    <string name="create_project_action">创建新的附属包</string>
+
+    <string name="profile_chip">Workspace</string>
+    <string name="profile_title">个人账号与生成偏好</string>
+    <string name="profile_defaults_title">默认创建配置</string>
+    <string name="profile_defaults_description">这些值会自动带进新建弹窗，用来减少重复输入，同时保证生成草稿时格式稳定。</string>
+    <string name="profile_author_hint">默认作者标识</string>
+    <string name="profile_version_hint">默认 min_engine_version</string>
+    <string name="profile_description_hint">默认描述文案</string>
+    <string name="profile_resource_switch">新建时默认同时生成资源包</string>
+    <string name="profile_save_button">保存个人配置</string>
+    <string name="profile_policy_title">生成策略</string>
+    <string name="profile_policy_description">当前版本生成 behavior_pack / resource_pack 标准目录与 manifest.json 草稿。行为包会在存在资源包时自动写入依赖，字段遵循官方文档要求。</string>
+    <string name="profile_doc_links">官方参考：
+manifest.json: https://learn.microsoft.com/en-us/minecraft/creator/reference/content/addonsreference/packmanifest?view=minecraft-bedrock-stable
+版本建议: https://learn.microsoft.com/en-gb/minecraft/creator/documents/choosingpackminengineversion?view=minecraft-bedrock-stable</string>
+    <string name="profile_workspace_format">工作目录：%1$s</string>
+
+    <string name="create_sheet_title">新建附属包</string>
+    <string name="create_sheet_description">弹窗里集中处理创建与复制配置。当前生成的是官方结构草稿，后续可继续接模板和 Sora 编辑器。</string>
+    <string name="create_sheet_copy_action">复制最近一次配置</string>
+    <string name="create_name_hint">项目名称</string>
+    <string name="create_namespace_hint">命名空间</string>
+    <string name="create_author_hint">作者标识</string>
+    <string name="create_version_hint">目标游戏版本</string>
+    <string name="create_description_hint">附属包描述</string>
+    <string name="create_sheet_manifest_note">manifest 固定按稳定版 format_version: 2 生成；version 默认从 1.0.0 起步。</string>
+    <string name="create_behavior_switch">生成行为包 (behavior_pack)</string>
+    <string name="create_resource_switch">生成资源包 (resource_pack)</string>
+    <string name="create_cancel_button">取消</string>
+    <string name="create_confirm_button">创建项目</string>
+    <string name="create_project_success">已创建 %1$s</string>
+    <string name="create_project_error">创建失败：%1$s</string>
+    <string name="create_project_validation">请至少生成一个包，并填写项目名称。</string>
+
+    <string name="project_meta_format">命名空间：%1$s  ·  包版本：%2$s  ·  游戏版本：%3$s</string>
+    <string name="project_updated_format">最近写入：%1$s</string>
+    <string name="project_type_full">行为 + 资源</string>
+    <string name="project_type_behavior_only">仅行为</string>
+    <string name="project_type_resource_only">仅资源</string>
+    <string name="project_editor_button">进入编辑器</string>
+    <string name="project_location_button">查看目录</string>
+    <string name="project_editor_placeholder">Sora 编辑器入口已为 %1$s 预留，下一步只需要接文件树和代码视图。</string>
+    <string name="project_location_feedback">%1$s</string>
+
+    <string name="settings_saved">个人配置已保存</string>
+    <string name="settings_validation_error">版本号必须是 x.y.z 格式，例如 1.21.132。</string>
+    <string name="copy_latest_empty">当前还没有可复制的项目配置。</string>
+    <string name="copy_latest_done">已填充最近一次项目的配置</string>
 </resources>
