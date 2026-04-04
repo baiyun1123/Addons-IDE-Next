@@ -1,5 +1,6 @@
 package com.addons.addons_next
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         projectRecycler.adapter = projectListAdapter
         projectRecycler.setHasFixedSize(true)
         projectRecycler.itemAnimator = null
+        projectRecycler.isNestedScrollingEnabled = false
         profileDocLinksText.text = getString(R.string.profile_doc_links)
         workspacePathText.text = getString(
             R.string.profile_workspace_format,
@@ -261,11 +263,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showEditorPlaceholder(project: AddonProject) {
-        Snackbar.make(
-            binding.root,
-            getString(R.string.project_editor_placeholder, project.name),
-            Snackbar.LENGTH_LONG
-        ).show()
+        startActivity(
+            Intent(this, ProjectEditorActivity::class.java)
+                .putExtra(ProjectEditorActivity.EXTRA_PROJECT_ID, project.id)
+                .putExtra(ProjectEditorActivity.EXTRA_PROJECT_NAME, project.name)
+                .putExtra(ProjectEditorActivity.EXTRA_PROJECT_ROOT, project.rootPath)
+        )
     }
 
     private fun showProjectLocation(project: AddonProject) {
@@ -282,7 +285,7 @@ class MainActivity : AppCompatActivity() {
             val animatedViews = listOf(
                 binding.topBar,
                 binding.homeSummaryCard,
-                listView,
+                binding.projectListSection.takeIf { binding.homePage.isVisible } ?: listView,
                 binding.bottomNavigation,
                 binding.addProjectFab
             )

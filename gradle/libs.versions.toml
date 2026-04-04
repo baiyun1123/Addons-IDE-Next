@@ -6,6 +6,7 @@ appcompat = "1.7.1"
 material = "1.13.0"
 constraintlayout = "2.2.1"
 recyclerview = "1.4.0"
+soraEditor = "0.24.4"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -18,3 +19,4 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+sora-editor = { group = "io.github.rosemoe", name = "editor", version.ref = "soraEditor" }

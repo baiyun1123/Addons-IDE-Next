@@ -97,3 +97,37 @@
 - 关联文件：
   - `app/src/main/res/layout/activity_main.xml`
   - `.github/workflows/android-ci.yml`
+
+# 任务标题：修复首页卡片遮挡列表，并接入本地文件树与 Sora 编辑器
+
+- 完成时间：2026-04-04 02:35
+- 变更内容：
+  - 将首页 `homePage` 改为可滚动容器，避免顶部摘要卡在小屏设备上把列表区域挤没，项目列表可以直接下滑查看。
+  - 新增 `ProjectEditorActivity`，点击项目卡片的“进入编辑器”后会打开独立工作区，而不再停留在占位提示。
+  - 接入 Sora `CodeEditor` 依赖，支持打开项目内文本文件、修改内容并保存回磁盘。
+  - 新增文件树 `RecyclerView` 与适配器，支持目录展开/收起、文件选择高亮，以及行为包/资源包目录浏览。
+  - 为项目存储补充 `touchProject()`，保存文件后会刷新项目最近修改时间，首页列表排序能跟上编辑行为。
+  - 补充编辑器相关布局、字符串和清单注册，并新增平板宽屏布局，保证手机和大屏都能使用。
+- 关键决策：
+  - 不把编辑器硬塞回首页，而是独立为一个工作区页面，避免首页继续膨胀，也更适合后续接导出、搜索和多文件操作。
+  - 首页 bug 采用“整页可滚动”修法，而不是继续压缩摘要卡高度；这样能直接解决小屏看不到列表的问题，兼容性更稳。
+  - Sora 先接最稳定的纯文本编辑能力，不在这一轮同时引入 TextMate 语法包和语言注册，先把打开、编辑、保存这条主链路打通。
+  - 本次按你的要求只做本地改动，不处理 GitHub 推送、发布或远程工作流相关动作。
+- 风险与待办：
+  - 当前已具备文件树与文本编辑，但还没有“新建文件/删除文件/重命名/搜索替换/导出 `.mcaddon`”这些更深的 IDE 能力。
+  - 本地 `assembleDebug` 已尝试执行，但当前环境缺少 Android SDK 路径配置，Gradle 报错找不到 `sdk.dir`，因此还没有拿到完整编译结果。
+  - 如果后续要继续本地验证，需要先在项目根目录补 `local.properties` 或配置 `ANDROID_HOME` / `ANDROID_SDK_ROOT` 指向可用 SDK。
+- 关联文件：
+  - `app/build.gradle`
+  - `gradle/libs.versions.toml`
+  - `app/src/main/AndroidManifest.xml`
+  - `app/src/main/java/com/addons/addons_next/MainActivity.kt`
+  - `app/src/main/java/com/addons/addons_next/AddonProjectStorage.kt`
+  - `app/src/main/java/com/addons/addons_next/FileTreeAdapter.kt`
+  - `app/src/main/java/com/addons/addons_next/ProjectEditorActivity.kt`
+  - `app/src/main/res/layout/activity_main.xml`
+  - `app/src/main/res/layout/activity_project_editor.xml`
+  - `app/src/main/res/layout-sw720dp/activity_project_editor.xml`
+  - `app/src/main/res/layout/item_file_tree.xml`
+  - `app/src/main/res/drawable/bg_file_tree_item.xml`
+  - `app/src/main/res/values/strings.xml`

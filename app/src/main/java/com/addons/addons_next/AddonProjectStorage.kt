@@ -125,6 +125,18 @@ class AddonProjectStorage(private val context: Context) {
         return project
     }
 
+    fun touchProject(projectId: String) {
+        val updatedAt = System.currentTimeMillis()
+        val updatedProjects = loadProjects().map { project ->
+            if (project.id == projectId) {
+                project.copy(updatedAt = updatedAt)
+            } else {
+                project
+            }
+        }
+        saveProjects(updatedProjects)
+    }
+
     private fun saveProjects(projects: List<AddonProject>) {
         val jsonArray = JSONArray()
         projects
