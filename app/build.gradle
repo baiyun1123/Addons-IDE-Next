@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.addons.addons_next'
+    namespace = 'com.addons.addons_next'
     compileSdk 36
 
     defaultConfig {
@@ -17,7 +17,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
 
     compileOptions {

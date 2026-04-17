@@ -131,3 +131,39 @@
   - `app/src/main/res/layout/item_file_tree.xml`
   - `app/src/main/res/drawable/bg_file_tree_item.xml`
   - `app/src/main/res/values/strings.xml`
+
+# 任务标题：修复 problems-report.html 中的 Gradle DSL 弃用警告
+
+- 完成时间：2026-04-04 15:35
+- 变更内容：
+  - 根据 `problems-report.html` 中的 2 条问题记录，修复 `app/build.gradle` 里的 Groovy DSL 弃用写法。
+  - 将 `namespace 'com.addons.addons_next'` 改为 `namespace = 'com.addons.addons_next'`。
+  - 将 `viewBinding true` 改为 `viewBinding = true`。
+- 关键决策：
+  - 本次只处理报告中实际出现的问题，不额外改动业务代码或扩大 Gradle 配置调整范围。
+  - 按你的要求不依赖本地构建结果，直接以 `problems-report.html` 里的诊断信息作为修复依据。
+- 风险与待办：
+  - 当前报告内容仅包含 Gradle 9 兼容性弃用警告，不包含 Kotlin/资源编译错误；如果后续还有新的失败，需要再看新的报告或终端首个报错。
+  - 顶层 `build.gradle` 仍保留旧式 Groovy 风格写法，但这次报告没有指向它，暂不一并改动。
+- 关联文件：
+  - `app/build.gradle`
+  - `problems-report.html`
+  - `code.md`
+
+# 任务标题：同步远程 main 并修复 FileTreeAdapter Kotlin 可见性编译错误
+
+- 完成时间：2026-04-17 23:58
+- 变更内容：
+  - 已通过 `git fetch --prune Addons main` 同步 GitHub 远程 `main` 引用，确认本地 HEAD 与远程 `main` 均为 `36485d7e1543613774009800859c0c93d849762c`。
+  - 修复 GitHub Actions 中 `Build debug APK` 失败的 Kotlin 可见性错误。
+  - 将 `FileTreeAdapter.FileTreeEntry` 从私有嵌套数据类调整为适配器的普通嵌套数据类，避免 `FileTreeViewHolder.bind()` 的公开函数签名暴露私有类型。
+  - 已尝试本地执行 `sh ./gradlew --no-daemon --stacktrace --warning-mode all --console=plain assembleDebug`，但当前环境缺少 Android SDK 配置，构建在进入 Kotlin 编译前失败。
+- 关键决策：
+  - 本次只调整导致编译失败的类型可见性，不改文件树展开、选择和渲染逻辑，降低行为回归风险。
+  - 保留当前本地已暂存的 `app/build.gradle`、`problems-report.html` 与既有 `code.md` 变更，不覆盖用户已有改动。
+- 风险与待办：
+  - 需要在配置好 `ANDROID_HOME` / `sdk.dir` 的环境中再次执行 Gradle，或推送后通过 GitHub Actions 验证完整 debug/release 构建链路。
+  - 如果 CI 后续继续失败，应优先查看新的首个编译错误或上传的 build reports。
+- 关联文件：
+  - `app/src/main/java/com/addons/addons_next/FileTreeAdapter.kt`
+  - `code.md`

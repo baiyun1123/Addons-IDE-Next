@@ -128,7 +128,7 @@ class FileTreeAdapter(
         }
     }
 
-    private data class FileTreeEntry(
+    data class FileTreeEntry(
         val file: File,
         val depth: Int,
         val isDirectory: Boolean,
