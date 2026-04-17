@@ -167,3 +167,35 @@
 - 关联文件：
   - `app/src/main/java/com/addons/addons_next/FileTreeAdapter.kt`
   - `code.md`
+
+# 任务标题：将项目编辑页改为侧滑文件树与全屏 Sora 编辑器
+
+- 完成时间：2026-04-18 00:17
+- 变更内容：
+  - 将 `ProjectEditorActivity` 的文件树从固定卡片区域改为 `DrawerLayout` 侧滑栏，点击顶部文件夹按钮或更多菜单可打开文件树，点击遮罩空白区域由系统抽屉逻辑关闭。
+  - 主编辑区改为直接承载 Sora `CodeEditor`，去掉原来的上下/左右双卡片结构；顶部保留返回、文件树、保存和更多菜单入口。
+  - 选中文件后会先保存当前文件，再打开新文件并自动收起侧滑文件树；返回键在文件树打开时优先关闭文件树，否则保存并退出编辑页。
+  - 新增编辑页更多菜单，包含文件树、保存、刷新树和返回项目列表。
+  - 补充 DrawerLayout 依赖、编辑页工具图标和相关字符串资源。
+- 关键决策：
+  - 手机与 `sw720dp` 平板布局统一使用侧滑文件树，避免同一个编辑页在不同屏幕上交互模型不一致。
+  - 保留现有文件读写、大小限制、文本类型判断和项目最近修改时间更新逻辑，只调整工作区布局与入口。
+  - 顶部操作使用图标按钮，更多操作放入弹出菜单，减少编辑器主区域占用。
+- 风险与待办：
+  - 当前本地环境仍缺少 Android SDK 配置，完整编译需要在配置好 `ANDROID_HOME` / `sdk.dir` 的环境中执行，或推送后通过 GitHub Actions 验证。
+  - 后续如果继续扩展 IDE 能力，可以在更多菜单中追加新建文件、重命名、删除、搜索等动作。
+- 关联文件：
+  - `app/src/main/java/com/addons/addons_next/ProjectEditorActivity.kt`
+  - `app/src/main/res/layout/activity_project_editor.xml`
+  - `app/src/main/res/layout-sw720dp/activity_project_editor.xml`
+  - `app/src/main/res/menu/editor_overflow_menu.xml`
+  - `app/src/main/res/drawable/ic_arrow_back_24.xml`
+  - `app/src/main/res/drawable/ic_close_24.xml`
+  - `app/src/main/res/drawable/ic_folder_24.xml`
+  - `app/src/main/res/drawable/ic_more_vert_24.xml`
+  - `app/src/main/res/drawable/ic_refresh_24.xml`
+  - `app/src/main/res/drawable/ic_save_24.xml`
+  - `app/src/main/res/values/strings.xml`
+  - `app/build.gradle`
+  - `gradle/libs.versions.toml`
+  - `code.md`

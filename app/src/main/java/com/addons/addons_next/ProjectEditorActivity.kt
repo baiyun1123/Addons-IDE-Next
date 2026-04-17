@@ -2,9 +2,12 @@ package com.addons.addons_next
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -96,6 +99,12 @@ class ProjectEditorActivity : AppCompatActivity() {
                 right = resources.getDimensionPixelSize(R.dimen.screen_padding) + systemBars.right,
                 bottom = resources.getDimensionPixelSize(R.dimen.space_16) + systemBars.bottom
             )
+            binding.editorDrawerPanel.updatePadding(
+                left = resources.getDimensionPixelSize(R.dimen.space_16) + systemBars.left,
+                top = resources.getDimensionPixelSize(R.dimen.space_16) + systemBars.top,
+                right = resources.getDimensionPixelSize(R.dimen.space_16),
+                bottom = resources.getDimensionPixelSize(R.dimen.space_16) + systemBars.bottom
+            )
 
             insets
         }
@@ -107,15 +116,22 @@ class ProjectEditorActivity : AppCompatActivity() {
             this@ProjectEditorActivity,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    finishEditor()
+                    if (editorRoot.isDrawerOpen(GravityCompat.START)) {
+                        editorRoot.closeDrawer(GravityCompat.START)
+                    } else {
+                        finishEditor()
+                    }
                 }
             }
         )
         editorBackButton.setOnClickListener { finishEditor() }
+        editorFileTreeButton.setOnClickListener { editorRoot.openDrawer(GravityCompat.START) }
+        editorDrawerCloseButton.setOnClickListener { editorRoot.closeDrawer(GravityCompat.START) }
         editorRefreshButton.setOnClickListener {
             refreshTree(openFirstFileIfNeeded = currentFile?.exists() != true)
         }
         editorSaveButton.setOnClickListener { persistCurrentFile(showFeedback = true) }
+        editorMenuButton.setOnClickListener { showEditorMenu(it) }
     }
 
     private fun refreshTree(openFirstFileIfNeeded: Boolean) {
@@ -138,17 +154,19 @@ class ProjectEditorActivity : AppCompatActivity() {
         if (!persistCurrentFile(showFeedback = false)) {
             return
         }
-        openFile(file)
+        if (openFile(file)) {
+            binding.editorRoot.closeDrawer(GravityCompat.START)
+        }
     }
 
-    private fun openFile(file: File) {
+    private fun openFile(file: File): Boolean {
         if (!file.exists() || !file.isFile || !isChildOfProject(file)) {
             Snackbar.make(binding.root, getString(R.string.editor_open_failed, file.name), Snackbar.LENGTH_LONG).show()
-            return
+            return false
         }
         if (!isEditableTextFile(file)) {
             Snackbar.make(binding.root, getString(R.string.editor_binary_unsupported), Snackbar.LENGTH_LONG).show()
-            return
+            return false
         }
         if (file.length() > MAX_EDITABLE_FILE_BYTES) {
             Snackbar.make(
@@ -156,10 +174,10 @@ class ProjectEditorActivity : AppCompatActivity() {
                 getString(R.string.editor_file_too_large, MAX_EDITABLE_FILE_BYTES / 1024),
                 Snackbar.LENGTH_LONG
             ).show()
-            return
+            return false
         }
 
-        runCatching {
+        return runCatching {
             file.readText()
         }.onSuccess { content ->
             currentFile = file
@@ -176,6 +194,31 @@ class ProjectEditorActivity : AppCompatActivity() {
                 getString(R.string.editor_open_failed, error.message ?: file.name),
                 Snackbar.LENGTH_LONG
             ).show()
+        }.isSuccess
+    }
+
+    private fun showEditorMenu(anchor: View) {
+        PopupMenu(this, anchor).apply {
+            menuInflater.inflate(R.menu.editor_overflow_menu, menu)
+            setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.editorMenuOpenFiles -> {
+                        binding.editorRoot.openDrawer(GravityCompat.START)
+                        true
+                    }
+                    R.id.editorMenuSave -> persistCurrentFile(showFeedback = true)
+                    R.id.editorMenuRefreshTree -> {
+                        refreshTree(openFirstFileIfNeeded = currentFile?.exists() != true)
+                        true
+                    }
+                    R.id.editorMenuClose -> {
+                        finishEditor()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            show()
         }
     }
 

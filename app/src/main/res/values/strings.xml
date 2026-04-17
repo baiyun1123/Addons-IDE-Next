@@ -71,6 +71,11 @@ manifest.json: https://learn.microsoft.com/en-us/minecraft/creator/reference/con
     <string name="editor_page_subtitle">文件树 + Sora 编辑器工作区</string>
     <string name="editor_workspace_path">项目目录：%1$s</string>
     <string name="editor_back_button">返回</string>
+    <string name="editor_files_button_desc">打开文件树</string>
+    <string name="editor_menu_button_desc">更多选项</string>
+    <string name="editor_close_drawer_desc">关闭文件树</string>
+    <string name="editor_menu_open_files">文件树</string>
+    <string name="editor_menu_close">返回项目列表</string>
     <string name="editor_refresh_button">刷新树</string>
     <string name="editor_save_button">保存</string>
     <string name="editor_tree_title">文件树</string>

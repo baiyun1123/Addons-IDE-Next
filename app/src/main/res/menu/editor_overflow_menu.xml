@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editorMenuOpenFiles"
+        android:icon="@drawable/ic_folder_24"
+        android:title="@string/editor_menu_open_files" />
+    <item
+        android:id="@+id/editorMenuSave"
+        android:icon="@drawable/ic_save_24"
+        android:title="@string/editor_save_button" />
+    <item
+        android:id="@+id/editorMenuRefreshTree"
+        android:icon="@drawable/ic_refresh_24"
+        android:title="@string/editor_refresh_button" />
+    <item
+        android:id="@+id/editorMenuClose"
+        android:icon="@drawable/ic_arrow_back_24"
+        android:title="@string/editor_menu_close" />
+</menu>
